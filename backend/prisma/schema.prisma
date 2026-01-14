@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AuthorizedUser {
+  id        Int      @id @default(autoincrement())
+  email     String
+  role      String
+  createdAt DateTime @default(now())
+}
+
+model Submission {
+  id                 Int      @id @default(autoincrement())
+  fullName           String
+  accountNumber      String
+  email              String
+  role               String
+  photoPath          String
+  dniFrontPath       String
+  dniBackPath        String
+  academicRecordPath String
+  form03Path         String
+  status             String   @default("RECIBIDA")
+  adminObservation   String?
+  createdAt          DateTime @default(now())
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String  @unique
+  password  String
+  createdAt DateTime @default(now())
+}
